@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escala K3 Invest — Expert XP 2025</title>
+<style>
+  :root{
+    --blue: #1e2d54;
+    --blue-2: #2c3f74;
+    --blue-light: #eef1f8;
+    --gold: #c9a04e;
+    --text: #1b1f2a;
+    --muted: #6b7385;
+    --border: #dde1ec;
+    --bg: #f6f7fb;
+    --white: #ffffff;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+  header{
+    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-2) 100%);
+    color: #fff;
+    padding: 40px 24px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::after{
+    content:"";
+    position:absolute;
+    top:-60px; right:-60px;
+    width:220px; height:220px;
+    border-radius:50%;
+    background: rgba(201,160,78,0.15);
+  }
+  header::before{
+    content:"";
+    position:absolute;
+    bottom:-80px; left:-40px;
+    width:180px; height:180px;
+    border-radius:50%;
+    background: rgba(255,255,255,0.06);
+  }
+  header h1{
+    margin:0 0 6px;
+    font-size: clamp(1.4rem, 3.2vw, 2rem);
+    letter-spacing: 0.5px;
+    position:relative;
+    z-index:1;
+  }
+  header .sub{
+    color: var(--gold);
+    font-weight:600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    margin-bottom:10px;
+    position:relative;
+    z-index:1;
+  }
+  header .dates{
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.85);
+    position:relative;
+    z-index:1;
+  }
+
+  nav.tabs{
+    display:flex;
+    justify-content:center;
+    flex-wrap: wrap;
+    gap:8px;
+    padding: 18px 16px;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top:0;
+    z-index: 10;
+  }
+  nav.tabs button{
+    border: 1px solid var(--border);
+    background: var(--white);
+    color: var(--blue);
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .15s ease;
+  }
+  nav.tabs button:hover{
+    border-color: var(--blue);
+  }
+  nav.tabs button.active{
+    background: var(--blue);
+    color: #fff;
+    border-color: var(--blue);
+  }
+
+  main{
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 28px 16px 60px;
+  }
+
+  .day-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin: 4px 0 18px;
+    color: var(--blue);
+  }
+  .day-title .badge{
+    background: var(--gold);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight:700;
+    padding: 4px 10px;
+    border-radius: 999px;
+    letter-spacing: 0.5px;
+  }
+  .day-title h2{
+    margin:0;
+    font-size: 1.25rem;
+  }
+
+  .table-wrap{
+    background: var(--white);
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 10px rgba(30,45,84,0.05);
+    margin-bottom: 26px;
+  }
+  table{
+    width:100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+  thead th{
+    background: var(--blue);
+    color: #fff;
+    text-align:left;
+    padding: 12px 14px;
+    font-weight:600;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+  }
+  tbody td{
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tbody tr:last-child td{ border-bottom:none; }
+  tbody tr:nth-child(even){ background: var(--blue-light); }
+  tbody tr:hover{ background: #e5eaf5; }
+  td.horario{
+    font-weight:700;
+    color: var(--blue);
+    white-space: nowrap;
+  }
+  td.empty{ color:#c3c8d6; }
+
+  .special-row td{
+    background: var(--blue) !important;
+    color:#fff;
+    font-weight:700;
+    text-align:center;
+    letter-spacing:0.3px;
+  }
+
+  .search-box{
+    display:flex;
+    gap:10px;
+    margin-bottom: 18px;
+    align-items:center;
+  }
+  .search-box input{
+    flex:1;
+    max-width: 360px;
+    padding: 11px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color .15s;
+  }
+  .search-box input:focus{
+    border-color: var(--blue);
+  }
+  .count-tag{
+    font-size:0.8rem;
+    color: var(--muted);
+    white-space:nowrap;
+  }
+
+  .date-heading{
+    color: var(--blue);
+    font-size: 1rem;
+    margin: 22px 0 10px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .date-group:first-of-type .date-heading{ margin-top:0; }
+  .date-group.hidden{ display:none; }
+
+  section.day{ display:none; }
+  section.day.active{ display:block; animation: fade .25s ease; }
+  @keyframes fade{ from{opacity:0; transform: translateY(4px);} to{opacity:1; transform:none;} }
+
+  footer{
+    text-align:center;
+    padding: 20px;
+    color: var(--muted);
+    font-size: 0.78rem;
+  }
+
+  @media (max-width: 640px){
+    table{ font-size: 0.78rem; }
+    thead th, tbody td{ padding: 9px 8px; }
+    nav.tabs button{ padding: 8px 12px; font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="sub">K3 Invest</div>
+  <h1>Expert XP 2025 — Escala do Stand</h1>
+  <div class="dates">23, 24 e 25 de julho &nbsp;|&nbsp; 09h30 às 20h</div>
+</header>
+
+<nav class="tabs">
+  <button class="tab-btn active" data-target="quinta">Quinta 23/07</button>
+  <button class="tab-btn" data-target="sexta">Sexta 24/07</button>
+  <button class="tab-btn" data-target="sabado">Sábado 25/07</button>
+  <button class="tab-btn" data-target="individual">Escala Individual</button>
+</nav>
+
+<main>
+
+  <!-- QUINTA -->
+  <section class="day active" id="quinta">
+    <div class="day-title"><span class="badge">DIA 1</span><h2>Quinta-feira, 23/07</h2></div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Horário</th><th>Pessoa 1</th><th>Pessoa 2</th><th>Pessoa 3</th><th>Pessoa 4</th><th>Pessoa 5</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="horario">09h30 – 12h00</td>
+            <td>Alisson Nunes Freitas</td>
+            <td>Camila Mascarenhas de Carvalho Nora</td>
+            <td>Fernando Victor Amaro</td>
+            <td>Carolina Maurina Aver</td>
+            <td class="empty">—</td>
+          </tr>
+          <tr>
+            <td class="horario">12h00 – 13h30 <br><small>(K3+)</small></td>
+            <td>Maria Fernanda Marchini Vidal</td>
+            <td>Giovanni Cavenaghi Silva</td>
+            <td class="empty">—</td>
+            <td class="empty">—</td>
+            <td class="empty">—</td>
+          </tr>
+          <tr>
+            <td class="horario">13h30 – 15h30</td>
+            <td>Antonio José Marinho Bernardo</td>
+            <td>Diogo Jatoba Segabinazzi</td>
+            <td>João Tavares Aquino</td>
+            <td>Gabriel Santana de Rezende</td>
+            <td>Cynthia Ruth de Oliveira Osório</td>
+          </tr>
+          <tr>
+            <td class="horario">15h30 – 17h30</td>
+            <td>Flávia Bandeira de Mello</td>
+            <td>Gabriel Matheus Greggio</td>
+            <td>Lucas Pucinelli Borges de Souza</td>
+            <td>Glenrégis da Silva Machado</td>
+            <td>Leandro Pacovski</td>
+          </tr>
+          <tr>
+            <td class="horario">17h30 – 20h00</td>
+            <td>Letícia Romin Nogueira</td>
+            <td>Lilian Samantha Lopes da Silva</td>
+            <td>Bruno Barros Cerqueira</td>
+            <td>Leonaldo Costa</td>
+            <td>Luana Carrijo Durade</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SEXTA -->
+  <section class="day" id="sexta">
+    <div class="day-title"><span class="badge">DIA 2</span><h2>Sexta-feira, 24/07</h2></div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Horário</th><th>Pessoa 1</th><th>Pessoa 2</th><th>Pessoa 3</th><th>Pessoa 4</th><th>Pessoa 5</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="horario">09h30 – 11h30</td>
+            <td>Jailton Panissolo Mendonça</td>
+            <td>Jordana Mota Martelo Gardin</td>
+            <td>Catarine Lima do Nascimento</td>
+            <td>Felippe de Alcalai Pereira</td>
+            <td>Felipe Gandolpho Soave Ambrosio</td>
+          </tr>
+          <tr>
+            <td class="horario">11h30 – 13h30</td>
+            <td>Rodrigo Cristiano Del Basso</td>
+            <td>Cristiano Costa da Silva</td>
+            <td>Regis Takasse Koketsu</td>
+            <td>Mariane Mayumi Leite Kato</td>
+            <td>Patricia Gomes Cavalcante</td>
+          </tr>
+          <tr>
+            <td class="horario">13h30 – 15h30</td>
+            <td>Alisson Nunes Freitas</td>
+            <td>Fernando Victor Amaro</td>
+            <td>João Tavares Aquino</td>
+            <td>Tiago Gouveia do Nascimento</td>
+            <td>Valdeci Carlos Morelli</td>
+          </tr>
+          <tr>
+            <td class="horario">15h30 – 18h15</td>
+            <td>Antonio José Marinho Bernardo</td>
+            <td>Diogo Jatoba Segabinazzi</td>
+            <td>Lucas Pucinelli Borges de Souza</td>
+            <td>Vera Lucia Alves de Carvalho</td>
+            <td>Viviani Ostan Corazin</td>
+          </tr>
+          <tr class="special-row">
+            <td colspan="6">18h15 – 20h00 · Programação Especial Will Smith — Todos presentes</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SABADO -->
+  <section class="day" id="sabado">
+    <div class="day-title"><span class="badge">DIA 3</span><h2>Sábado, 25/07</h2></div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Horário</th><th>Pessoa 1</th><th>Pessoa 2</th><th>Pessoa 3</th><th>Pessoa 4</th><th>Pessoa 5</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="horario">09h30 – 11h30</td>
+            <td>Flávia Bandeira de Mello</td>
+            <td>Gabriel Matheus Greggio</td>
+            <td>Fabio Gusman</td>
+            <td class="empty">—</td>
+            <td class="empty">—</td>
+          </tr>
+          <tr>
+            <td class="horario">11h30 – 13h30</td>
+            <td>Letícia Romin Nogueira</td>
+            <td>Lilian Samantha Lopes da Silva</td>
+            <td>Luis Fernando Khadour</td>
+            <td class="empty">—</td>
+            <td class="empty">—</td>
+          </tr>
+          <tr>
+            <td class="horario">13h30 – 14h40</td>
+            <td>Rodrigo Cristiano Del Basso</td>
+            <td>Regis Takasse Koketsu</td>
+            <td>Marcio Ferraz Ciconeli</td>
+            <td class="empty">—</td>
+            <td class="empty">—</td>
+          </tr>
+          <tr class="special-row">
+            <td colspan="6">14h40 – 20h00 · Liga XP Awards 14h40 | Brazil Advisor Awards 16h35 | Show Thiaguinho 19h00</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- INDIVIDUAL -->
+  <section class="day" id="individual">
+    <div class="day-title"><span class="badge">CONSULTA</span><h2>Escala Individual</h2></div>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Buscar por nome...">
+      <span class="count-tag" id="countTag"></span>
+    </div>
+
+    <div class="date-group" data-date="quinta">
+      <h3 class="date-heading">📅 Quinta-feira, 23/07</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Nome</th><th>Horário</th></tr></thead>
+          <tbody class="individualBody">
+            <tr><td>Alisson Nunes Freitas</td><td>09h30 – 12h00</td></tr>
+            <tr><td>Antonio José Marinho Bernardo</td><td>13h30 – 15h30</td></tr>
+            <tr><td>Bruno Barros Cerqueira</td><td>17h30 – 20h00</td></tr>
+            <tr><td>Camila Mascarenhas de Carvalho Nora</td><td>09h30 – 12h00</td></tr>
+            <tr><td>Carolina Maurina Aver</td><td>09h30 – 12h00</td></tr>
+            <tr><td>Cynthia Ruth de Oliveira Osório</td><td>13h30 – 15h30</td></tr>
+            <tr><td>Diogo Jatoba Segabinazzi</td><td>13h30 – 15h30</td></tr>
+            <tr><td>Fernando Victor Amaro</td><td>09h30 – 12h00</td></tr>
+            <tr><td>Flávia Bandeira de Mello</td><td>15h30 – 17h30</td></tr>
+            <tr><td>Gabriel Matheus Greggio</td><td>15h30 – 17h30</td></tr>
+            <tr><td>Gabriel Santana de Rezende</td><td>13h30 – 15h30</td></tr>
+            <tr><td>Giovanni Cavenaghi Silva</td><td>12h00 – 13h30 (K3+)</td></tr>
+            <tr><td>Glenrégis da Silva Machado</td><td>15h30 – 17h30</td></tr>
+            <tr><td>João Tavares Aquino</td><td>13h30 – 15h30</td></tr>
+            <tr><td>Leandro Pacovski</td><td>15h30 – 17h30</td></tr>
+            <tr><td>Leonaldo Costa</td><td>17h30 – 20h00</td></tr>
+            <tr><td>Letícia Romin Nogueira</td><td>17h30 – 20h00</td></tr>
+            <tr><td>Lilian Samantha Lopes da Silva</td><td>17h30 – 20h00</td></tr>
+            <tr><td>Luana Carrijo Durade</td><td>17h30 – 20h00</td></tr>
+            <tr><td>Lucas Pucinelli Borges de Souza</td><td>15h30 – 17h30</td></tr>
+            <tr><td>Maria Fernanda Marchini Vidal</td><td>12h00 – 13h30 (K3+)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="date-group" data-date="sexta">
+      <h3 class="date-heading">📅 Sexta-feira, 24/07</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Nome</th><th>Horário</th></tr></thead>
+          <tbody class="individualBody">
+            <tr><td>Alisson Nunes Freitas</td><td>13h30 – 15h30</td></tr>
+            <tr><td>Antonio José Marinho Bernardo</td><td>15h30 – 18h15</td></tr>
+            <tr><td>Catarine Lima do Nascimento</td><td>09h30 – 11h30</td></tr>
+            <tr><td>Cristiano Costa da Silva</td><td>11h30 – 13h30</td></tr>
+            <tr><td>Diogo Jatoba Segabinazzi</td><td>15h30 – 18h15</td></tr>
+            <tr><td>Felipe Gandolpho Soave Ambrosio</td><td>09h30 – 11h30</td></tr>
+            <tr><td>Felippe de Alcalai Pereira</td><td>09h30 – 11h30</td></tr>
+            <tr><td>Fernando Victor Amaro</td><td>13h30 – 15h30</td></tr>
+            <tr><td>Jailton Panissolo Mendonça</td><td>09h30 – 11h30</td></tr>
+            <tr><td>João Tavares Aquino</td><td>13h30 – 15h30</td></tr>
+            <tr><td>Jordana Mota Martelo Gardin</td><td>09h30 – 11h30</td></tr>
+            <tr><td>Lucas Pucinelli Borges de Souza</td><td>15h30 – 18h15</td></tr>
+            <tr><td>Mariane Mayumi Leite Kato</td><td>11h30 – 13h30</td></tr>
+            <tr><td>Patricia Gomes Cavalcante</td><td>11h30 – 13h30</td></tr>
+            <tr><td>Regis Takasse Koketsu</td><td>11h30 – 13h30</td></tr>
+            <tr><td>Rodrigo Cristiano Del Basso</td><td>11h30 – 13h30</td></tr>
+            <tr><td>Tiago Gouveia do Nascimento</td><td>13h30 – 15h30</td></tr>
+            <tr><td>Valdeci Carlos Morelli</td><td>13h30 – 15h30</td></tr>
+            <tr><td>Vera Lucia Alves de Carvalho</td><td>15h30 – 18h15</td></tr>
+            <tr><td>Viviani Ostan Corazin</td><td>15h30 – 18h15</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="date-group" data-date="sabado">
+      <h3 class="date-heading">📅 Sábado, 25/07</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Nome</th><th>Horário</th></tr></thead>
+          <tbody class="individualBody">
+            <tr><td>Fabio Gusman</td><td>09h30 – 11h30</td></tr>
+            <tr><td>Flávia Bandeira de Mello</td><td>09h30 – 11h30</td></tr>
+            <tr><td>Gabriel Matheus Greggio</td><td>09h30 – 11h30</td></tr>
+            <tr><td>Letícia Romin Nogueira</td><td>11h30 – 13h30</td></tr>
+            <tr><td>Lilian Samantha Lopes da Silva</td><td>11h30 – 13h30</td></tr>
+            <tr><td>Luis Fernando Khadour</td><td>11h30 – 13h30</td></tr>
+            <tr><td>Marcio Ferraz Ciconeli</td><td>13h30 – 14h40</td></tr>
+            <tr><td>Regis Takasse Koketsu</td><td>13h30 – 14h40</td></tr>
+            <tr><td>Rodrigo Cristiano Del Basso</td><td>13h30 – 14h40</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>K3 Invest · Expert XP 2025</footer>
+
+<script>
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const days = document.querySelectorAll('.day');
+  tabBtns.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      tabBtns.forEach(b=>b.classList.remove('active'));
+      days.forEach(d=>d.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.target).classList.add('active');
+    });
+  });
+
+  const searchInput = document.getElementById('searchInput');
+  const rows = Array.from(document.querySelectorAll('.individualBody tr'));
+  const dateGroups = Array.from(document.querySelectorAll('.date-group'));
+  const countTag = document.getElementById('countTag');
+
+  function updateCount(){
+    const visible = rows.filter(r=>r.style.display !== 'none').length;
+    countTag.textContent = visible + ' registro(s)';
+  }
+
+  searchInput.addEventListener('input', ()=>{
+    const q = searchInput.value.trim().toLowerCase();
+    rows.forEach(r=>{
+      const name = r.children[0].textContent.toLowerCase();
+      r.style.display = name.includes(q) ? '' : 'none';
+    });
+    dateGroups.forEach(g=>{
+      const anyVisible = Array.from(g.querySelectorAll('tr')).some(r=>r.style.display !== 'none');
+      g.classList.toggle('hidden', !anyVisible);
+    });
+    updateCount();
+  });
+
+  updateCount();
+</script>
+
+</body>
+</html>
